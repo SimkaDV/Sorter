@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Xcode
+*.xcodeproj/
+xcuserdata/
+DerivedData/
+build/
+*.xcuserstate
+*.moved-aside
+
+# XcodeGen генерирует Info.plist
+App/Info.plist
+
+# SwiftPM
+.build/
+.swiftpm/
+Package.resolved
