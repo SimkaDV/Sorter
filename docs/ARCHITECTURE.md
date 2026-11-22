@@ -68,7 +68,7 @@
 | `Part` | Деталь коллекции: `ModelName` + файлы одной версии (STL / 3MF) + ссылка на F3D коллекции. |
 | `ModelFile` | Файл: `url`, `FileKind`, `ModelName?`, размер, даты. |
 | `FileKind` | `stl`, `threeMF`, `gcode3MF`, `f3d`, `blend`, `blendBackup`, `txt`, `other`. Определяется только здесь (`FileKind(url:)`), включая двойное расширение `.gcode.3mf`. |
-| `Status` | `inWork`, `testing`, `ready`, `rejected`. Знает свою подпись («В работе»…) и имя тега Finder. Цвет не знает: это UI (§4.3). |
+| `Status` | `inWork`, `testing`, `ready`, `rejected`. Знает свою подпись («В работе»…) и имя тега Finder. Цвет не знает: это UI (§4.3). Разбор подписи из txt и тега — в Notes/`TagMapping` (Domain не зависит от `TextNormalizer`). |
 | `Version` | `v1`, `v2.1`, `v10`: компоненты-числа, `Comparable`, `next()`, `nextMinor()`. |
 | `Completeness` | Признаки заполненности (SPEC §3.7) и `missing: [Item]` для подсказки. |
 | `SortKey` / `SortOrder` | Имя, дата добавления, дата изменения, размер, тип; по возрастанию или убыванию. |
@@ -79,7 +79,7 @@
 
 - `TextNormalizer` — **единственное место** нормализации: обрезка пробелов, двойные пробелы, NFC. Используют все: сканер, парсер имён, txt, FileOps. Сравнение имён — только через `normalized` ключи.
 - `ModelName { title, params, collection, version }` — значение. `build(ext:)` собирает имя. Разделитель — `Naming.separator`.
-- `NameParser.parse(_:)` — разбор новых и старых «грязных» имён. Возвращает `ParsedName` с полем `confidence`. Нераспознанное — честно: всё в `title`, версии нет.
+- `NameParser.parse(fileName:collection:)` — разбор новых и старых «грязных» имён. Возвращает `ParsedName`: `name`, `kind`, `ext`, `markers: [NameMarker]` (отрезанные хвосты «копия», «test», «final», «Эталон», хвост слайсера) и `confidence` (`high` — уже по правилу, `medium` — разобрано, `low` — не понято). Нераспознанное — честно: всё в `title`. `collection` — имя коллекции, в которой лежит файл: без него `Крышка – Кейсы` читается как название + параметры.
 - `NameParser.groupingKey(_:)` — ключ «название без версии и хвостов». Его используют и сканер (склейка STL + 3MF в деталь), и экран «Разобрать» (автогруппировка). Один ключ — одинаковое поведение в обоих местах.
 
 ### 3.3 Notes — txt-файл (SPEC §3.6)
