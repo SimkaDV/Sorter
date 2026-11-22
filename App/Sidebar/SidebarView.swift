@@ -4,13 +4,6 @@ import SwiftUI
 struct SidebarView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
-            Label("Поиск моделей", systemImage: "magnifyingglass")
-                .foregroundStyle(Theme.textSecondary)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 7)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Theme.background.opacity(0.6), in: Theme.shape)
-
             VStack(alignment: .leading, spacing: 8) {
                 Label("Избранное", systemImage: "star")
                 Label("Разобрать", systemImage: "tray")
@@ -31,8 +24,10 @@ struct SidebarView: View {
             Spacer()
         }
         .font(.callout)
-        .padding(14)
-        .frame(maxHeight: .infinity, alignment: .top)
+        .lineLimit(1)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Theme.panel, in: Theme.shape)
         .shadow(color: .black.opacity(0.35), radius: 12, y: 4)
     }

@@ -16,13 +16,16 @@ struct SorterApp: App {
 /// Главное окно: плавающая боковая панель слева, основная область справа.
 struct RootView: View {
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .top, spacing: Theme.windowInset) {
             SidebarView()
-                .frame(width: 240)
-                .padding(10)
+                .frame(width: Theme.sidebarWidth)
             BrowserView()
         }
+        .padding(.top, Theme.contentTop)
+        .padding([.leading, .trailing, .bottom], Theme.windowInset)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Theme.background)
         .foregroundStyle(Theme.textPrimary)
+        .ignoresSafeArea()
     }
 }

@@ -6,6 +6,8 @@ enum Theme {
     // MARK: Поверхности и текст
     static let background = Color(hex: 0x1C1D1F)
     static let panel = Color(hex: 0x2B2D31)
+    /// Поля ввода на фоне окна (поиск).
+    static let field = Color(hex: 0x26272B)
     static let textPrimary = Color(hex: 0xECE9E4)
     static let textSecondary = Color(hex: 0x8B8E92)
 
@@ -25,6 +27,14 @@ enum Theme {
     static let cornerRadius: CGFloat = 14
     static let cardSize: CGFloat = 124
     static let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+    static let fieldShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+
+    // MARK: Раскладка окна (design/window-mockup.html)
+    /// Отступ контента от краёв окна и между панелью и основной областью.
+    static let windowInset: CGFloat = 8
+    /// Верх контента: сразу под кнопками окна.
+    static let contentTop: CGFloat = 32
+    static let sidebarWidth: CGFloat = 120
 }
 
 extension Color {
